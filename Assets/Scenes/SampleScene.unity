@@ -1008,6 +1008,7 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 440596119}
+  camHolder: {fileID: 454284747}
 --- !u!1 &1416767815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,13 +1233,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   wallRunForce: 200
+  wallJumpUpForce: 0
+  wallJumpSideForce: 0
   wallClimbSpeed: 3
-  maxWallRunTime: 0.7
+  maxWallRunTime: 1.5
+  jumpKey: 32
   upwardsRunKey: 304
   downwardsRunKey: 306
   wallCheckDistance: 0.7
   minJumpHeight: 2
+  exitWallTime: 0.2
+  useGravity: 0
+  gravityCounterForce: 20
   orientation: {fileID: 440596119}
+  cam: {fileID: 963194229}
 --- !u!1 &1764703994
 GameObject:
   m_ObjectHideFlags: 0
