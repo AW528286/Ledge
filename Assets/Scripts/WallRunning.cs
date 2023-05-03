@@ -43,13 +43,13 @@ public class WallRunning : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     public PlayerCam cam;
-    private PlayerMovementAdvanced pm;
+    private PlayerMovement pm;
     private Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        pm = GetComponent<PlayerMovementAdvanced>();
+        pm = GetComponent<PlayerMovement>();
     }
 
     private void Update()

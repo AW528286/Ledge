@@ -8,7 +8,7 @@ public class Sliding : MonoBehaviour
     public Transform orientation;
     public Transform playerObj;
     private Rigidbody rb;
-    private PlayerMovementAdvanced pm;
+    private PlayerMovement pm;
 
     [Header("Sliding")]
     public float maxSlideTime;
@@ -28,7 +28,7 @@ public class Sliding : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        pm = GetComponent<PlayerMovementAdvanced>();
+        pm = GetComponent<PlayerMovement>();
 
         startYScale = playerObj.localScale.y;
     }

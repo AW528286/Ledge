@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerMovementAdvanced : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
@@ -11,10 +11,13 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float sprintSpeed;
     public float slideSpeed;
     public float wallrunSpeed;
+    public float dashSpeed;
+    public float dashSpeedChangeFactor;
     private Sliding pm;
 
-    private float desiredMoveSpeed;
-    private float lastdesiredMoveSpeed;
+    public float maxYSpeed;
+
+   
 
     public float speedIncreaseMultiplier;
     public float slopeIncreaseMultiplier;
@@ -25,7 +28,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
+    public bool readyToJump;
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -34,7 +37,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode sprintKey = KeyCode.LeftShift;
+    public KeyCode sprintKey = KeyCode.CapsLock;
     public KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
@@ -64,12 +67,14 @@ public class PlayerMovementAdvanced : MonoBehaviour
         sprinting,
         wallrunning,
         crouching,
+        dashing,
         sliding,
         air
     }
 
     public bool sliding;
     public bool wallrunning;
+    public bool dashing;
 
     private void Start()
     {
@@ -91,7 +96,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         StateHandler();
 
         // handle drag
-        if (grounded)
+        if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching )
             rb.drag = groundDrag;
         else
             rb.drag = 0;
@@ -110,6 +115,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         // when to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
+            Debug.Log("jump");
             readyToJump = false;
 
             Jump();
@@ -131,15 +137,26 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
     }
 
+ private float desiredMoveSpeed;
+    private float lastdesiredMoveSpeed;
+    private MovementState lastState;
+    private bool keepMomentum;
     private void StateHandler()
     {
-        if (wallrunning)
+        if (dashing)
+        {
+            state = MovementState.dashing;
+            desiredMoveSpeed = dashSpeed;
+            speedChangeFactor = dashSpeedChangeFactor;
+        }
+
+        else if (wallrunning)
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallrunSpeed;
         }
 
-        if (sliding)
+        else if (sliding)
         {
             state = MovementState.sliding;
 
@@ -162,8 +179,10 @@ public class PlayerMovementAdvanced : MonoBehaviour
         // Mode - Sprinting
         else if (grounded && Input.GetKey(sprintKey))
         {
+            Debug.Log("Sprinting");
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
+          
         }
 
         // Mode - Walking
@@ -177,6 +196,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
         else
         {
             state = MovementState.air;
+
+            if (desiredMoveSpeed < sprintSpeed)
+                desiredMoveSpeed = walkSpeed;
+            else
+                desiredMoveSpeed = sprintSpeed;
         }
 
         if(Mathf.Abs(desiredMoveSpeed - lastdesiredMoveSpeed) > 4f && moveSpeed != 0 )
@@ -189,14 +213,38 @@ public class PlayerMovementAdvanced : MonoBehaviour
             moveSpeed = desiredMoveSpeed;
         }
 
+   
+
+        bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastdesiredMoveSpeed;
+        if (lastState == MovementState.dashing) keepMomentum = true;
+
+        if(desiredMoveSpeedHasChanged)
+        {
+            if (keepMomentum)
+            {
+                StopAllCoroutines();
+                StartCoroutine(SmoothlyLerpMoveSpeed());
+            }
+            else
+            {
+                StopAllCoroutines();
+                moveSpeed = desiredMoveSpeed;
+            }
+        }
+
         lastdesiredMoveSpeed = desiredMoveSpeed;
+        lastState = state;
+
     }
 
+    private float speedChangeFactor;
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
         float time = 0;
         float difference = Mathf.Abs(desiredMoveSpeed- moveSpeed);
         float startValue = moveSpeed;
+
+        float boostFactor = speedChangeFactor;
 
         while (time < difference)
         {
@@ -216,6 +264,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
 
         moveSpeed = desiredMoveSpeed;
+        speedChangeFactor = 1f;
+        keepMomentum = false;
     }
 
     private void MovePlayer()
@@ -265,6 +315,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
+        if (maxYSpeed != 0 && rb.velocity.y > maxYSpeed)
+            rb.velocity = new Vector3(rb.velocity.x, maxYSpeed, rb.velocity.z);
     }
 
     private void Jump()
