@@ -19,7 +19,7 @@ public class Sliding : MonoBehaviour
     private float startYScale;
 
     [Header("Input")]
-    public KeyCode slideKey = KeyCode.LeftControl;
+    public KeyCode slideKey = KeyCode.C;
     private float horizontalInput;
     private float verticalInput;
 

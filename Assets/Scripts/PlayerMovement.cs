@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private bool exitingSlope;
 
 
+
     public Transform orientation;
 
     float horizontalInput;
@@ -180,8 +181,9 @@ public class PlayerMovement : MonoBehaviour
         else if (grounded && Input.GetKey(sprintKey))
         {
             Debug.Log("Sprinting");
-            state = MovementState.sprinting;
+            state = MovementState.sprinting; 
             desiredMoveSpeed = sprintSpeed;
+       
           
         }
 
