@@ -15,6 +15,7 @@ public class Dashing : MonoBehaviour
     public float dashUpwardForce;
     public float maxDashYSpeed;
     public float dashDuration;
+    
 
     [Header("CameraEffects")]
     public PlayerCam cam;
@@ -46,6 +47,8 @@ public class Dashing : MonoBehaviour
 
         if (dashCdTimer > 0)
             dashCdTimer -= Time.deltaTime;
+
+       
     }
 
     private void Dash()
