@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
     public TMP_Text timeText;
     void Start()
     {
-        
+        timeIsRunning = true;
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
         {
             if(timeRemaining >= 0)
             {
-                timeRemaining -= Time.deltaTime;
+                timeRemaining += Time.deltaTime;
                 DisplayTime(timeRemaining);
             }
         }
