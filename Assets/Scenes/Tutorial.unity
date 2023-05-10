@@ -3812,12 +3812,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601513067}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 5.972232, y: 123.5606, z: 55.315857}
-  m_LocalScale: {x: 1.3400095, y: 1.3400093, z: 1.3400095}
+  m_LocalPosition: {x: -8.614638, y: 0.1980133, z: -301.0633}
+  m_LocalScale: {x: 1.3400097, y: 1.3400093, z: 1.3400097}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1548493793}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &601513069
 MonoBehaviour:
@@ -7174,7 +7174,7 @@ GameObject:
   - component: {fileID: 1112702800}
   - component: {fileID: 1112702799}
   - component: {fileID: 1112702798}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TurretTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9686,8 +9686,6 @@ Transform:
   - {fileID: 431991204}
   - {fileID: 1038168769}
   - {fileID: 2030979380}
-  - {fileID: 601513068}
-  - {fileID: 2130778986}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13224,12 +13222,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130778985}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.8812218, y: 123.5606, z: 57.99106}
-  m_LocalScale: {x: 1.3400095, y: 1.3400093, z: 1.3400095}
+  m_LocalPosition: {x: -11.705648, y: 0.1980133, z: -298.3881}
+  m_LocalScale: {x: 1.3400097, y: 1.3400093, z: 1.3400097}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1548493793}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2130778987
 MonoBehaviour:
