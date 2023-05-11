@@ -12658,7 +12658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2146e4cdf91d55f449b5a07b1a7a89d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelName: Main Menu
+  LevelName: Tutorial Score 3
 --- !u!1 &1961946889
 GameObject:
   m_ObjectHideFlags: 0
