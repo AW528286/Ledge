@@ -11651,7 +11651,7 @@ MonoBehaviour:
   allowAllDirections: 1
   disableGravity: 1
   resetVel: 1
-  dashCd: 5
+  dashCd: 3
   dashKey: 101
 --- !u!114 &1646090405
 MonoBehaviour:
