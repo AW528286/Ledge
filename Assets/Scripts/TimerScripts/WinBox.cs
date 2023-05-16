@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class WinBox : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public TimerMaybe Timerl;
+    private void OnTriggerExit(Collider other)
     {
-        GameObject.Find("Player").SendMessage("Finish");
+        Debug.Log("hiiiiiiiiiiiiiiiiiiii");
+        Timerl.Finish();
     }
 }

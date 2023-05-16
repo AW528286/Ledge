@@ -7,7 +7,7 @@ public class Teleporting : MonoBehaviour
     public Transform teleportTarget;
     public GameObject Player;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider FallingPoint)
     {
         Player.transform.position = teleportTarget.transform.position;
     }
